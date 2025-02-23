@@ -1,20 +1,60 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { GroceryListScreen } from './src/screens/GroceryListScreen';
+import { PreservationTipsScreen } from './src/screens/PreservationTipsScreen';
+import { MealPlanScreen } from './src/screens/MealPlanScreen';
+import { RecipeGeneratorScreen } from './src/screens/RecipeGeneratorScreen';
+import { MaterialIcons } from '@expo/vector-icons';
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: '#7BC96F',
+
+        }}
+      >
+        <Tab.Screen
+          name="GroceryList"
+          component={GroceryListScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="shopping-cart" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Preservation"
+          component={PreservationTipsScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="kitchen" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="MealPlan"
+          component={MealPlanScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="restaurant-menu" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Recipes"
+          component={RecipeGeneratorScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="food-bank" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
